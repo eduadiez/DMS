@@ -4,30 +4,30 @@ services:
     build:
       context: grafana
       args:
-        UPSTREAM_VERSION_GRAFANA: 11.0.0
-    image: "grafana.dms.dnp.dappnode.eth:1.0.1"
+        UPSTREAM_VERSION_GRAFANA: v10.4.4
+    image: grafana.dms.dnp.dappnode.eth:1.0.1
     restart: always
     volumes:
-      - "grafana_data:/var/lib/grafana"
+      - grafana_data:/var/lib/grafana
   prometheus:
     build:
       context: prometheus
       args:
         UPSTREAM_VERSION_PROMETHEUS: v2.52.0
-    image: "prometheus.dms.dnp.dappnode.eth:1.0.1"
+    image: prometheus.dms.dnp.dappnode.eth:1.0.1
     restart: always
     volumes:
-      - "prometheus_data:/prometheus"
-      - "prometheus_file_sd:/prometheus_file_sd"
+      - prometheus_data:/prometheus
+      - prometheus_file_sd:/prometheus_file_sd
     environment:
       DATA_RETENTION_DAYS: 15
   manager:
     build: ./manager
-    image: "manager.dms.dnp.dappnode.eth:1.0.1"
+    image: manager.dms.dnp.dappnode.eth:1.0.1
     restart: always
     volumes:
-      - "manager_data:/data"
-      - "prometheus_file_sd:/prometheus_file_sd"
+      - manager_data:/data
+      - prometheus_file_sd:/prometheus_file_sd
 volumes:
   grafana_data: {}
   prometheus_data: {}
